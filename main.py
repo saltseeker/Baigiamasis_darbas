@@ -2,7 +2,7 @@ import pygame, sys
 from settings import *
 from level import Level
 
-class Main:
+class Game:
     def __init__(self):
         pygame.init()
         self.display_surface =  pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
@@ -26,5 +26,5 @@ class Main:
             pygame.display.update()
 
 if __name__ == '__main__' :
-    main = Main()
-    main.run()
+    game = Game()
+    game.run()
