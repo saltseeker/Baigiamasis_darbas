@@ -2,9 +2,11 @@ import pygame, sys
 from settings import *
 
 class Main:
-    def __init__(self) -> None:
+    def __init__(self):
         pygame.init()
         self.display_surface =  pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
+        self.clock = pygame.time.Clock()
+
 
     def run(self):
         while True:
@@ -14,7 +16,7 @@ class Main:
                     sys.exit()
 
             
-            self.clock.tick() / 1000
+            dt = self.clock.tick() / 1000
             self.display_surface.fill((249,131,103))
 
             pygame.display.update()
