@@ -2,10 +2,11 @@ import pygame, sys
 from settings import *
 from level import Level
 
+
 class Game:
     def __init__(self):
         pygame.init()
-        self.display_surface =  pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
+        self.display_surface =  pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
         pygame.display.set_caption('Yet to decide')
         self.clock = pygame.time.Clock()
         self.level = Level()
