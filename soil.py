@@ -63,7 +63,11 @@ class SoilLayer:
                     r = 'X' in row[index_col + 1]
                     l = 'X' in row[index_col - 1]
 
-                    tile_type = 'lr'
+                    tile_type = 'o'
+
+                    #checking sides
+                    if l and b and r and l:
+                        tile_type = 'x'
 
                     SoilTile(
                         pos = (index_col * TILE_SIZE, index_row * TILE_SIZE), 
