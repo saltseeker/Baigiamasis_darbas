@@ -118,6 +118,7 @@ class Level:
 					self.player_add(plant.plant_type)
 					plant.kill()
 					Particle(plant.rect.topleft, plant.image, self.all_sprites, z = LAYERS['main'])
+					self.soil_layer.grid[plant.rect.centery // TILE_SIZE][plant.rect.centerx // TILE_SIZE].remove('P')
 
 	def run(self,dt):
 		self.display_surface.fill('black')
