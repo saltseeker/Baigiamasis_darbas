@@ -30,6 +30,7 @@ class Plant(pygame.sprite.Sprite):
         self.age = 0
         self.max_age = len(self.frame) - 1
         self.grow_speed = GROW_SPEED[plant_type]
+        self.harvestable = False
 
         self.image = self.frame[self.age]
         self.y_offset = - 16 if plant_type == 'corn' else -8
@@ -39,6 +40,13 @@ class Plant(pygame.sprite.Sprite):
     def grow(self):
         if self.check_watered(self.rect.center):
             self.age += self.grow_speed
+
+            if int(self.age) > 0:
+                self.z = LAYERS['main']
+
+            if self.age >= self.max_age:
+                self.age = self.max_age
+                self.harvestable = True
 
             self.image = self.frame[int(self.age)]
             self.rect = self.image.get_rect(midbottom = self.soil.rect.midbottom + pygame.math.Vector2(0,self.y_offset))
@@ -149,7 +157,7 @@ class SoilLayer:
             for index_col, cell in enumerate(row):
                 if 'X' in cell:
                     
-                     #tile image options  top, bottom, right, left
+                    #tile image options  top, bottom, right, left
                     t = 'X' in self.grid[index_row - 1][index_col]
                     b = 'X' in self.grid[index_row + 1][index_col]
                     r = 'X' in row[index_col + 1]
