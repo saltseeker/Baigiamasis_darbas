@@ -17,7 +17,7 @@ class SoilLayer:
         self.soil_sprites = pygame.sprite.Group()
 
 
-        self.soil_surf = pygame.image.load('graphics/soil/o.png')
+        
         self.soil_surf = import_folder_dict('graphics/soil/')
 
         self.create_soil_grid()
@@ -50,6 +50,11 @@ class SoilLayer:
                 if 'F' in self.grid[y][x]:
                     self.grid[y][x].append('X')
                     self.create_soil_tiles()
+
+    def water(self, target_pos):
+        for soil_sprite in self.soil_sprites.sprites():
+            if soil_sprite.rect.collidepoint(target_pos):
+                print('soil tile watered')
 
     def create_soil_tiles(self):
         self.soil_sprites.empty()

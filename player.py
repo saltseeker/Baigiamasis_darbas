@@ -19,7 +19,7 @@ class Player(pygame.sprite.Sprite):
 		# movement attributes
 		self.direction = pygame.math.Vector2()
 		self.pos = pygame.math.Vector2(self.rect.center)
-		self.speed = 200
+		self.speed = 300
 
 		# collision
 		self.hitbox = self.rect.copy().inflate((-126,-70))
@@ -67,7 +67,7 @@ class Player(pygame.sprite.Sprite):
 					tree.damage()
 		
 		if self.selected_tool == 'water':
-			pass
+			self.soil_layer.water(self.target_pos)
 
 	def get_target_pos(self):
 
