@@ -111,10 +111,17 @@ class Level:
 				apple.kill()
 			tree.create_fruit()
 
+	def plant_collision(self):
+		if self.soil_layer.plant_sprites:
+			for plant in self.soil_layer.plant_sprites.sprites():
+				if plant.harvestable and plant.rect.colliderect(self.player.hitbox):
+					plant.kill()
+
 	def run(self,dt):
 		self.display_surface.fill('black')
 		self.all_sprites.custom_draw(self.player)
 		self.all_sprites.update(dt)
+		self.plant_collision()
 
 		self.overlay.display()
 
