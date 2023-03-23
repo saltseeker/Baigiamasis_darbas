@@ -43,6 +43,7 @@ class Plant(pygame.sprite.Sprite):
 
             if int(self.age) > 0:
                 self.z = LAYERS['main']
+                self.hitbox = self.rect.copy().inflate(-26,-self.rect.height * 0.4)
 
             if self.age >= self.max_age:
                 self.age = self.max_age
@@ -52,10 +53,11 @@ class Plant(pygame.sprite.Sprite):
             self.rect = self.image.get_rect(midbottom = self.soil.rect.midbottom + pygame.math.Vector2(0,self.y_offset))
         
 class SoilLayer:
-    def __init__(self, all_sprites):
+    def __init__(self, all_sprites, collision_sprites):
 
         # sprite group
         self.all_sprites = all_sprites
+        self.collision_sprites = collision_sprites
         self.soil_sprites = pygame.sprite.Group()
         self.water_sprites = pygame.sprite.Group()
         self.plant_sprites = pygame.sprite.Group()
@@ -145,7 +147,7 @@ class SoilLayer:
 
                 if 'P' not in self.grid[y][x]:
                     self.grid[y][x].append('P')
-                Plant(seed, [self.all_sprites, self.plant_sprites], soil_sprite, self.check_watered)
+                    Plant(seed, [self.all_sprites, self.plant_sprites, self.collision_sprites], soil_sprite, self.check_watered)
 
     def update_plants(self):
         for plant in self.plant_sprites.sprites():
