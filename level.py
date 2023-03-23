@@ -28,7 +28,7 @@ class Level:
 		self.transition = Transition(self.reset, self.player)
 
 		self.rain = Rain(self.all_sprites)
-		self.raining = True
+		self.raining = randint(0, 10) > 3
 		self. soil_layer.raining = self.raining
 		
 
@@ -98,7 +98,10 @@ class Level:
 
 		self.soil_layer.remove_water()
 		# random rain
+		self.raining = randint(0, 10) > 3
 		self.soil_layer.raining = self.raining
+		if self.raining:
+			self.soil_layer.water_all()
 
 		# apples on the trees
 		for tree in self.tree_sprites.sprites():
