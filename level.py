@@ -115,6 +115,7 @@ class Level:
 		if self.soil_layer.plant_sprites:
 			for plant in self.soil_layer.plant_sprites.sprites():
 				if plant.harvestable and plant.rect.colliderect(self.player.hitbox):
+					self.player_add(plant.plant_type)
 					plant.kill()
 
 	def run(self,dt):
@@ -130,6 +131,7 @@ class Level:
 
 		if self.player.sleep:
 			self.transition.play()
+		
 
 class CameraGroup(pygame.sprite.Group):
 	def __init__(self):
