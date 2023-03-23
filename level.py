@@ -7,6 +7,7 @@ from pytmx.util_pygame import load_pygame
 from support import *
 from transition import Transition
 from soil import SoilLayer
+from sky import Rain
 
 class Level:
 	def __init__(self):
@@ -19,10 +20,14 @@ class Level:
 		self.collision_sprites = pygame.sprite.Group()
 		self.tree_sprites = pygame.sprite.Group()
 		self.interaction_sprites = pygame.sprite.Group()
+		
 		self.soil_layer = SoilLayer(self.all_sprites)
 		self.setup()
 		self.overlay = Overlay(self.player)
 		self.transition = Transition(self.reset, self.player)
+
+		self.rain = Rain(self.all_sprites)
+		self.raining = True
 		
 
 	def setup(self):
@@ -103,6 +108,9 @@ class Level:
 		self.all_sprites.update(dt)
 
 		self.overlay.display()
+
+		if self.raining:
+			self.rain.update()
 
 		if self.player.sleep:
 			self.transition.play()
