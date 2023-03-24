@@ -144,7 +144,7 @@ class Player(pygame.sprite.Sprite):
 				self.selected_tool = self.tools[self.tool_index]
 
 			# seed use
-			if keys[pygame.K_LCTRL]:
+			if keys[pygame.K_x]:
 				self.timers['seed use'].activate()
 				self.direction = pygame.math.Vector2()
 				self.frame_index = 0
@@ -216,6 +216,7 @@ class Player(pygame.sprite.Sprite):
 		self.hitbox.centery = round(self.pos.y)
 		self.rect.centery = self.hitbox.centery
 		self.collision('vertical')
+		
 
 	def update(self, dt):
 		self.input()
