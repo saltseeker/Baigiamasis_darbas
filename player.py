@@ -47,8 +47,8 @@ class Player(pygame.sprite.Sprite):
 		self.item_inventory = {
 			'wood':   5,
 			'apple':  5,
-			'corn':   5,
-			'tomato': 5
+			'corn':   10,
+			'tomato': 10
 		}
 		self.seed_inventory = {
 		'corn': 4,
@@ -63,6 +63,9 @@ class Player(pygame.sprite.Sprite):
 		self.soil_layer = soil_layer
 		self.toggle_shop = toggle_shop
 
+		# sound
+		self.watering = pygame.mixer.Sound('audio/water.mp3')
+
 	def use_tool(self):
 		if self.selected_tool == 'hoe':
 			self.soil_layer.get_hit(self.target_pos)
@@ -74,6 +77,7 @@ class Player(pygame.sprite.Sprite):
 		
 		if self.selected_tool == 'water':
 			self.soil_layer.water(self.target_pos)
+			self.watering.play()
 
 	def get_target_pos(self):
 

@@ -29,13 +29,20 @@ class Level:
 		self.transition = Transition(self.reset, self.player)
 
 		self.rain = Rain(self.all_sprites)
-		self.raining = randint(0, 10) > 3
+		self.raining = randint(0, 10) > 5
 		self. soil_layer.raining = self.raining
 		self.sky = Sky()
 
 		#shop
 		self.menu = Menu(self.player, self.toggle_shop)
 		self.shop_active = False
+
+		# sounds
+		self.success = pygame.mixer.Sound('audio/success.wav')
+		self.music = pygame.mixer.Sound('audio/music.mp3')
+		self.music.play(loops = -1)
+		self.music.set_volume(0.1)
+		
 	
 	def setup(self):
 		tmx_data = load_pygame('data/map.tmx')
@@ -103,6 +110,7 @@ class Level:
 	def player_add(self,item):
 
 		self.player.item_inventory[item] += 1
+		self.success.play()
 
 	def toggle_shop(self):
 
