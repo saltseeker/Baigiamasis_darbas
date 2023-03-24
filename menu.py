@@ -1,5 +1,6 @@
 import pygame
 from settings import *
+from timer import Timer
 
 class Menu:
     def __init__(self, player, toggle_menu):
@@ -20,6 +21,7 @@ class Menu:
         
         #menu navigation
         self.index = 0
+        self.timer = Timer(200)
 
     def display_money(self):
         text_surf = self.font.render(f'${self.player.money}', False, 'Black')
@@ -45,9 +47,21 @@ class Menu:
 
     def input(self):
         keys = pygame.key.get_pressed()
+        self.timer.update()
 
         if keys[pygame.K_ESCAPE]:
             self.toggle_menu()
+
+        if not self.timer.active:
+            if keys[pygame.K_UP]:
+                self.index -= 1
+                self.timer.activate()
+
+            if keys[pygame.K_DOWN]:
+                self.index += 1
+                self.timer.activate()
+
+               
 
     def show_entry(self, text_surf, amount, top, selected):
 
