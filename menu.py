@@ -61,7 +61,11 @@ class Menu:
                 self.index += 1
                 self.timer.activate()
 
-               
+        # menu limitations     
+        if self.index < 0:
+            self.index = len(self.options) - 1
+        if self.index > len(self.options) - 1:
+            self.index = 0      
 
     def show_entry(self, text_surf, amount, top, selected):
 
