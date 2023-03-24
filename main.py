@@ -2,8 +2,6 @@ import pygame, sys
 from settings import *
 from level import Level
 
-
-
 class Game:
     def __init__(self):
         pygame.init()
@@ -33,7 +31,7 @@ class Game:
             title_rect = title_surf.get_rect(center=(SCREEN_WIDTH/2, SCREEN_HEIGHT/3))
             self.screen.blit(title_surf, title_rect)
 
-            start_surf = self.font.render('Press ENTER to start', False, pygame.Color('black'))
+            start_surf = pygame.font.Font('font/LycheeSoda.ttf', 50).render('Press ENTER to start', False, pygame.Color('black'))
             start_rect = start_surf.get_rect(center=(SCREEN_WIDTH/2, SCREEN_HEIGHT/2))
             self.screen.blit(start_surf, start_rect)
 
