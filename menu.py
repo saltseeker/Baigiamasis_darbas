@@ -56,7 +56,10 @@ class Menu:
         text_rect = text_surf.get_rect(midleft = (self.main_rect.left + 20,bg_rect.centery))
         self.display_surface.blit(text_surf, text_rect)
 
-
+        # amount
+        amount_surf = self.font.render(str(amount), False, 'Black')
+        amount_rect = amount_surf.get_rect(midright = (self.main_rect.right - 20,bg_rect.centery))
+        self.display_surface.blit(amount_surf, amount_rect)
 
 
     def update(self):
