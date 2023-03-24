@@ -18,6 +18,13 @@ class Menu:
         self.sell_border = len(self.player.item_inventory) - 1
         self.setup()
 
+    def display_money(self):
+        text_surf = self.font.render(f'${self.player.money}', False, 'Black')
+        text_rect = text_surf.get_rect(midbottom = (SCREEN_WIDTH / 2,SCREEN_HEIGHT - 20))
+
+        
+        self.display_surface.blit(text_surf,text_rect)   
+
     def setup(self):
         #text surface
         self.text_surfs = []
@@ -42,6 +49,7 @@ class Menu:
 
     def update(self):
         self.input()
+        self.display_money()
         pygame.draw.rect(self.display_surface,'red', self.main_rect)
         #for text_index, text_surf in enumerate(self.text_surfs):
             #self.display_surface.blit(text_surf,(100,text_index * 50))
