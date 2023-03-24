@@ -68,4 +68,6 @@ class Menu:
         
         for text_index, text_surf in enumerate(self.text_surfs):
             top = self.main_rect.top + text_index * (text_surf.get_height() + (self.padding * 2) + self.space)
-            self.show_entry(text_surf, 0, top)
+            amount_list = list(self.player.item_inventory.values()) + list(self.player.seed_inventory.values())
+            amount = amount_list[text_index]
+            self.show_entry(text_surf, amount, top)
