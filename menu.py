@@ -17,6 +17,9 @@ class Menu:
         self.options = list(self.player.item_inventory.keys()) + list(self.player.seed_inventory.keys())
         self.sell_border = len(self.player.item_inventory) - 1
         self.setup()
+        
+        #menu navigation
+        self.index = 0
 
     def display_money(self):
         text_surf = self.font.render(f'${self.player.money}', False, 'Black')
@@ -46,7 +49,7 @@ class Menu:
         if keys[pygame.K_ESCAPE]:
             self.toggle_menu()
 
-    def show_entry(self, text_surf, amount, top):
+    def show_entry(self, text_surf, amount, top, selected):
 
         # background
         bg_rect = pygame.Rect(self.main_rect.left,top,self.width,text_surf.get_height() + (self.padding * 2))
@@ -61,6 +64,11 @@ class Menu:
         amount_rect = amount_surf.get_rect(midright = (self.main_rect.right - 20,bg_rect.centery))
         self.display_surface.blit(amount_surf, amount_rect)
 
+        # selected
+        if selected:
+            pygame.draw.rect(self.display_surface,'black',bg_rect,4,4)
+          
+
 
     def update(self):
         self.input()
@@ -70,4 +78,4 @@ class Menu:
             top = self.main_rect.top + text_index * (text_surf.get_height() + (self.padding * 2) + self.space)
             amount_list = list(self.player.item_inventory.values()) + list(self.player.seed_inventory.values())
             amount = amount_list[text_index]
-            self.show_entry(text_surf, amount, top)
+            self.show_entry(text_surf, amount, top, self.index == text_index)
