@@ -543,7 +543,7 @@
   <object id="271" gid="150" x="566.242" y="251.485" width="44" height="48"/>
  </objectgroup>
  <objectgroup id="12" name="Player">
-  <object id="253" name="Start" x="2588.3" y="1895.88">
+  <object id="253" name="Start" x="2462.97" y="1893.21">
    <point/>
   </object>
   <object id="254" name="Trader" x="510.547" y="448.606" width="274.667" height="191.333"/>
