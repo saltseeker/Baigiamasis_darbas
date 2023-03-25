@@ -30,11 +30,24 @@ class Game:
             title_surf = self.font.render('Farm land', False, pygame.Color('black'))
             title_rect = title_surf.get_rect(center=(SCREEN_WIDTH/2, SCREEN_HEIGHT/3))
             self.screen.blit(title_surf, title_rect)
+            start_color = pygame.Color('black')
+           
 
-            start_surf = pygame.font.Font('font/LycheeSoda.ttf', 50).render('Press ENTER to start', False, pygame.Color('black'))
+            start_surf = pygame.font.Font('font/LycheeSoda.ttf', 50).render('Press ENTER to start', False, start_color)
             start_rect = start_surf.get_rect(center=(SCREEN_WIDTH/2, SCREEN_HEIGHT/2))
-            self.screen.blit(start_surf, start_rect)
 
+            # Calculate the scale factor for the pulsating effect
+            scale_factor = abs((pygame.time.get_ticks() % 1000) - 500) / 500 + 1
+
+            # Scale the start_surf
+            pulsating_surf = pygame.transform.scale(start_surf, (int(start_surf.get_width() * scale_factor), int(start_surf.get_height() * scale_factor)))
+
+            # Calculate the new rect for the pulsating_surf
+            pulsating_rect = pulsating_surf.get_rect(center=start_rect.center)
+
+            self.screen.blit(pulsating_surf, pulsating_rect)
+
+            # Check for events
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     pygame.quit()
@@ -42,6 +55,7 @@ class Game:
                 elif event.type == pygame.KEYDOWN and event.key == pygame.K_RETURN:
                     return
 
+            # Update display
             pygame.display.update()
             self.clock.tick(60)
 
