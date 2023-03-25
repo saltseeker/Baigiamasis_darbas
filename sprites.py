@@ -116,12 +116,13 @@ class Tree(Generic):
 			self.check_death()
 
 	def create_fruit(self):
-		for pos in self.apple_pos:
-			if randint(0,10) < 2:
-				x = pos[0] + self.rect.left
-				y = pos[1] + self.rect.top
-				Generic(
-					pos = (x,y), 
-					surf = self.apple_surf, 
-					groups = [self.apple_sprites,self.groups()[0]],
-					z = LAYERS['fruit'])
+		if self.alive:
+			for pos in self.apple_pos:
+				if randint(0,10) < 2:
+					x = pos[0] + self.rect.left
+					y = pos[1] + self.rect.top
+					Generic(
+						pos = (x,y), 
+						surf = self.apple_surf, 
+						groups = [self.apple_sprites,self.groups()[0]],
+						z = LAYERS['fruit'])
