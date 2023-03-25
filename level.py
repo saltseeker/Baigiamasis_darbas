@@ -38,8 +38,8 @@ class Level:
 		self.shop_active = False
 
 		# sounds
-		self.success = pygame.mixer.Sound('audio/success.wav')
-		self.music = pygame.mixer.Sound('audio/music.mp3')
+		self.success = pygame.mixer.Sound('audio/success.ogg')
+		self.music = pygame.mixer.Sound('audio/music.ogg')
 		self.music.play(loops = -1)
 		self.music.set_volume(0.1)
 		

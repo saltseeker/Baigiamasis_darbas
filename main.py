@@ -1,6 +1,9 @@
+import asyncio
 import pygame, sys
 from settings import *
 from level import Level
+
+
 
 class Game:
     def __init__(self):
@@ -11,6 +14,7 @@ class Game:
         self.level = Level()
         self.font = pygame.font.Font('font/LycheeSoda.ttf', 24)
         self.start_image = pygame.image.load('graphics/world/start.gif')
+        
 
     def instruction(self):
         text = " Q = swap tool\n E = swap seed\n SPACE = action key\n X = plant"
@@ -59,7 +63,7 @@ class Game:
             pygame.display.update()
             self.clock.tick(60)
 
-    def run(self):
+    async def run(self):
         self.start_screen()
 
         while True:
@@ -72,6 +76,8 @@ class Game:
             self.level.run(dt)
             self.instruction()
             pygame.display.update()
+            await asyncio.sleep(0)
+
 if __name__ == '__main__':
     game = Game()
-    game.run()
+    asyncio.run(game.run())
