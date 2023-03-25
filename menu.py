@@ -109,13 +109,23 @@ class Menu:
         # selected
         if selected:
             pygame.draw.rect(self.display_surface,'black',bg_rect,4,4)
-           #sell // buy
+
+            # sell/buy and prices
             if self.index <= self.sell_border:
                 pos_rect = self.sell_text.get_rect(midleft = (self.main_rect.left + 150,bg_rect.centery))
+                price = SALE_PRICES[self.options[self.index]]
+                price_surf = self.font.render(f"${price}", False, 'Black')
+                price_rect = price_surf.get_rect(midleft = (pos_rect.right + 10, bg_rect.centery))
                 self.display_surface.blit(self.sell_text,pos_rect)
+                self.display_surface.blit(price_surf, price_rect)
             else:
                 pos_rect = self.buy_text.get_rect(midleft = (self.main_rect.left + 150,bg_rect.centery))
+                price = PURCHASE_PRICES[self.options[self.index]]
+                price_surf = self.font.render(f"${price}", False, 'Black')
+                price_rect = price_surf.get_rect(midleft = (pos_rect.right + 10, bg_rect.centery))
                 self.display_surface.blit(self.buy_text,pos_rect)
+                self.display_surface.blit(price_surf, price_rect)
+
 
           
     def update(self):
