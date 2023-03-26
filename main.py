@@ -1,8 +1,6 @@
-import asyncio
 import pygame, sys
 from settings import *
-from level import Level
-
+from level import *
 
 
 class Game:
@@ -63,7 +61,7 @@ class Game:
             pygame.display.update()
             self.clock.tick(60)
 
-    async def run(self):
+    def run(self):
         self.start_screen()
 
         while True:
@@ -71,13 +69,39 @@ class Game:
                 if event.type == pygame.QUIT:
                     pygame.quit()
                     sys.exit()
-  
+
             dt = self.clock.tick() / 1000
             self.level.run(dt)
             self.instruction()
+
+            # Display the inventory on the bottom right corner
+            money_surf = self.font.render(f"Money: {self.level.player.money}", False, pygame.Color('black'))
+            money_rect = money_surf.get_rect(bottomright=(SCREEN_WIDTH-20, SCREEN_HEIGHT-20))
+            self.screen.blit(money_surf, money_rect)
+
+            inventory_surf = self.font.render("", False, pygame.Color('black'))
+            inventory_rect = inventory_surf.get_rect(bottomright=(money_rect.left-20, SCREEN_HEIGHT-20))
+            self.screen.blit(inventory_surf, inventory_rect)
+
+            # Display the item inventory
+            for i, (item, count) in enumerate(self.level.player.item_inventory.items()):
+                item_surf = self.font.render(f"{item.capitalize()}: {count}", False, pygame.Color('black'))
+                item_rect = item_surf.get_rect(bottomright=(inventory_rect.right+120, inventory_rect.bottom-40-(i*30)))
+                self.screen.blit(item_surf, item_rect)
+
+            # Display the seed inventory
+            seed_inventory_surf = self.font.render("", False, pygame.Color('black'))
+            seed_inventory_rect = seed_inventory_surf.get_rect(bottomright=(inventory_rect.left-20, SCREEN_HEIGHT-20))
+            self.screen.blit(seed_inventory_surf, seed_inventory_rect)
+
+            for i, (seed, count) in enumerate(self.level.player.seed_inventory.items()):
+                seed_surf = self.font.render(f"{seed.capitalize()}: {count}", False, pygame.Color('black'))
+                seed_rect = seed_surf.get_rect(bottomright=(seed_inventory_rect.right+30, seed_inventory_rect.bottom-40-(i*30)))
+                self.screen.blit(seed_surf, seed_rect)
+
             pygame.display.update()
-            await asyncio.sleep(0)
+
 
 if __name__ == '__main__':
     game = Game()
-    asyncio.run(game.run())
+    game.run()
